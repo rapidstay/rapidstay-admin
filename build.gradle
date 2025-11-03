@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot'
-    id 'io.spring.dependency-management'
+    id 'org.springframework.boot' version '3.3.3'
+    id 'io.spring.dependency-management' version '1.1.6'
     id 'java'
 }
 
@@ -8,11 +8,20 @@ group = 'com.rapidstay'
 version = '0.0.1-SNAPSHOT'
 description = 'RapidStay Admin Module'
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    // --- ✅ 공통 모듈 (common.jar 직접 포함) ---
+    implementation files('libs/common-0.0.1-SNAPSHOT.jar')
+
     // --- Spring 기본 ---
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -21,11 +30,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
 
-    // ✅ Spring Batch (Job 트리거 용도일 경우 유지)
+    // --- Spring Batch (Job 트리거 용도일 경우 유지) ---
     implementation 'org.springframework.boot:spring-boot-starter-batch'
-
-    // --- 공통 모듈 ---
-    implementation project(':common')
 
     // --- JWT ---
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -44,21 +50,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-java {
-    sourceSets {
-        main {
-            java {
-                srcDirs = ['src/main/java']
-            }
-            resources {
-                srcDirs = ['src/main/resources']
-            }
-        }
-    }
-}
-
 bootJar {
-    archiveFileName = 'rapidstay-admin.jar' // ✅ 명시적 설정 (렌더 배포용)
+    archiveFileName = 'rapidstay-admin.jar' // ✅ Render 배포 시 jar 이름 고정
 }
 
 tasks.named('test') {
