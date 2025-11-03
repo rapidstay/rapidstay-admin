@@ -2,7 +2,7 @@ package com.rapidstay.xap.admin.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rapidstay.xap.common.dto.CityDTO;
+import com.rapidstay.xap.admin.common.dto.CityDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;

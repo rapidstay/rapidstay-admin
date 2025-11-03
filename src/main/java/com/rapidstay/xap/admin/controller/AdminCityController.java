@@ -1,6 +1,6 @@
 package com.rapidstay.xap.admin.controller;
 
-import com.rapidstay.xap.common.dto.CityDTO; // ✅ common 모듈 dto
+import com.rapidstay.xap.admin.common.dto.CityDTO; // ✅ common 모듈 dto
 import com.rapidstay.xap.admin.service.AdminCityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

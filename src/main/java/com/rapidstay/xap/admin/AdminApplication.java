@@ -12,7 +12,15 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @SpringBootApplication
 @ComponentScan(basePackages = {
         "com.rapidstay.xap.admin",
-        "com.rapidstay.xap.common"   // ✅ common 모듈의 @Configuration 포함
+        "com.rapidstay.xap.admin.common"
+})
+@EntityScan(basePackages = {
+        "com.rapidstay.xap.admin.entity",
+        "com.rapidstay.xap.admin.common.entity"
+})
+@EnableJpaRepositories(basePackages = {
+        "com.rapidstay.xap.admin.repository",
+        "com.rapidstay.xap.admin.common.repository"
 })
 public class AdminApplication {
 
