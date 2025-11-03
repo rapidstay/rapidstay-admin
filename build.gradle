@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     // --- ✅ 공통 모듈 (common.jar 직접 포함) ---
-    implementation files('libs/common-0.0.1-SNAPSHOT.jar')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // --- Spring 기본 ---
     implementation 'org.springframework.boot:spring-boot-starter-web'
