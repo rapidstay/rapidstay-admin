@@ -104,7 +104,7 @@ spring:
 
 rapidstay:
   api:
-    base-url: ${API_BASE_URL:https://xap-h2xh.onrender.com}
+    base-url: ${API_BASE_URL:https://rapidstay-api.onrender.com}
 
 admin:
   security:
@@ -158,7 +158,7 @@ spring:
 
 rapidstay:
   api:
-    base-url: ${API_BASE_URL:https://xap-h2xh.onrender.com}
+    base-url: ${API_BASE_URL:https://rapidstay-api.onrender.com}
 
 admin:
   security:
