@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:8082}
+  port: 8082
   servlet:
     context-path: /
 
@@ -7,10 +7,10 @@ spring:
   application:
     name: rapidstay-admin
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
+    active: local
 
 # ======================================================
-# 🏠 local 환경
+# 🏠 Local
 # ======================================================
 ---
 spring:
@@ -20,9 +20,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${DB_URL:jdbc:postgresql://dpg-d44bbu3ipnbc73d2n6q0-a.oregon-postgres.render.com:5432/rapidstay_db}
-    username: ${DB_USER:redshine75}
-    password: ${DB_PASS:EKj5HOzXrKDY91Y4a5F4rQzDyyL5QWpR}
+    url: jdbc:postgresql://dpg-d44bbu3ipnbc73d2n6q0-a.oregon-postgres.render.com:5432/rapidstay_db
+    username: redshine75
+    password: EKj5HOzXrKDY91Y4a5F4rQzDyyL5QWpR
 
   jpa:
     hibernate:
@@ -36,8 +36,8 @@ spring:
 
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
+      host: localhost
+      port: 6379
       timeout: 2000
 
   sql:
@@ -46,7 +46,7 @@ spring:
 
 rapidstay:
   api:
-    base-url: ${API_BASE_URL:http://localhost:8081}
+    base-url: http://localhost:8081
 
 admin:
   security:
@@ -67,8 +67,9 @@ management:
     health:
       show-details: never
 
+
 # ======================================================
-# 🚧 dev 환경 (Render / 개발서버)
+# 🚧 Dev (Render / 개발서버)
 # ======================================================
 ---
 spring:
@@ -94,17 +95,14 @@ spring:
 
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
-      timeout: 2000
-
-  sql:
-    init:
-      mode: never
+      url: rediss://default:1234@premium-mongrel-33101.upstash.io:6379
+      ssl: true
+      timeout: 10000
+      connect-timeout: 5000
 
 rapidstay:
   api:
-    base-url: ${API_BASE_URL:https://rapidstay-api.onrender.com}
+    base-url: https://rapidstay-api.onrender.com
 
 admin:
   security:
@@ -125,8 +123,9 @@ management:
     health:
       show-details: never
 
+
 # ======================================================
-# 🚀 prod 환경 (운영)
+# 🚀 Prod (운영 / Upstash Redis)
 # ======================================================
 ---
 spring:
@@ -152,13 +151,14 @@ spring:
 
   data:
     redis:
-      host: ${REDIS_HOST}
-      port: ${REDIS_PORT}
-      timeout: 2000
+      url: rediss://default:1234@premium-mongrel-33101.upstash.io:6379
+      ssl: true
+      timeout: 10000
+      connect-timeout: 5000
 
 rapidstay:
   api:
-    base-url: ${API_BASE_URL:https://rapidstay-api.onrender.com}
+    base-url: https://rapidstay-api.onrender.com
 
 admin:
   security:
