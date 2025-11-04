@@ -10,7 +10,7 @@ spring:
     active: local
 
 # ======================================================
-# 🏠 Local
+# 🏠 Local (외부 SSL 접속)
 # ======================================================
 ---
 spring:
@@ -34,11 +34,11 @@ spring:
     defer-datasource-initialization: true
     open-in-view: false
 
-  redis:
-    host: localhost
-    port: 6379
-    timeout: 2s
-    ssl: false
+  data:
+    redis:
+      url: rediss://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@oregon-keyvalue.render.com:6379
+      timeout: 30s
+      connect-timeout: 10s
 
   sql:
     init:
@@ -69,7 +69,7 @@ management:
 
 
 # ======================================================
-# 🚧 Dev (Render / 개발서버)
+# 🚧 Dev (Render 내부용 / 개발서버)
 # ======================================================
 ---
 spring:
@@ -93,14 +93,11 @@ spring:
     defer-datasource-initialization: true
     open-in-view: false
 
-  redis:
-    host: oregon-keyvalue.render.com
-    port: 6379
-    username: red-d40ub0k9c44c73cdgu60
-    password: eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY
-    ssl: true
-    timeout: 30s
-    connect-timeout: 10s
+  data:
+    redis:
+      url: redis://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@red-d40ub0k9c44c73cdgu60:6379
+      timeout: 30s
+      connect-timeout: 10s
 
 rapidstay:
   api:
@@ -127,7 +124,7 @@ management:
 
 
 # ======================================================
-# 🚀 Prod (운영 / Render Redis)
+# 🚀 Prod (Render 내부용 / 운영)
 # ======================================================
 ---
 spring:
@@ -151,14 +148,11 @@ spring:
     defer-datasource-initialization: false
     open-in-view: false
 
-  redis:
-    host: oregon-keyvalue.render.com
-    port: 6379
-    username: red-d40ub0k9c44c73cdgu60
-    password: eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY
-    ssl: true
-    timeout: 30s
-    connect-timeout: 10s
+  data:
+    redis:
+      url: redis://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@red-d40ub0k9c44c73cdgu60:6379
+      timeout: 30s
+      connect-timeout: 10s
 
 rapidstay:
   api:
