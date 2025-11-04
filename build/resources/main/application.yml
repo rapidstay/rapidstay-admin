@@ -34,11 +34,11 @@ spring:
     defer-datasource-initialization: true
     open-in-view: false
 
-  data:
-    redis:
-      host: localhost
-      port: 6379
-      timeout: 2000
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 2s
+    ssl: false
 
   sql:
     init:
@@ -93,11 +93,14 @@ spring:
     defer-datasource-initialization: true
     open-in-view: false
 
-  data:
-    redis:
-      url: redis://red-d40ub0k9c44c73cdgu60:6379
-      timeout: 30000
-      connect-timeout: 10000
+  redis:
+    host: oregon-keyvalue.render.com
+    port: 6379
+    username: red-d40ub0k9c44c73cdgu60
+    password: eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY
+    ssl: true
+    timeout: 30s
+    connect-timeout: 10s
 
 rapidstay:
   api:
@@ -124,7 +127,7 @@ management:
 
 
 # ======================================================
-# 🚀 Prod (운영 / Upstash Redis)
+# 🚀 Prod (운영 / Render Redis)
 # ======================================================
 ---
 spring:
@@ -148,11 +151,14 @@ spring:
     defer-datasource-initialization: false
     open-in-view: false
 
-  data:
-    redis:
-      url: redis://red-d40ub0k9c44c73cdgu60:6379
-      timeout: 30000
-      connect-timeout: 10000
+  redis:
+    host: oregon-keyvalue.render.com
+    port: 6379
+    username: red-d40ub0k9c44c73cdgu60
+    password: eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY
+    ssl: true
+    timeout: 30s
+    connect-timeout: 10s
 
 rapidstay:
   api:
