@@ -29,6 +29,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     // --- Spring Batch (Job 트리거 용도일 경우 유지) ---
     implementation 'org.springframework.boot:spring-boot-starter-batch'
