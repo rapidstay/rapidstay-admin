@@ -39,6 +39,7 @@ spring:
       host: localhost
       port: 6379
       timeout: 2000
+      ssl: false
 
   sql:
     init:
@@ -95,9 +96,13 @@ spring:
 
   data:
     redis:
-      url: rediss://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@oregon-keyvalue.render.com:6379
+      host: oregon-keyvalue.render.com
+      port: 6379
+      username: red-d40ub0k9c44c73cdgu60
+      password: eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY
       timeout: 30000
       connect-timeout: 10000
+      ssl: true
 
 rapidstay:
   api:
@@ -124,7 +129,7 @@ management:
 
 
 # ======================================================
-# 🚀 Prod (운영 / Upstash Redis)
+# 🚀 Prod (운영 / Render Redis)
 # ======================================================
 ---
 spring:
@@ -150,9 +155,13 @@ spring:
 
   data:
     redis:
-      url: rediss://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@oregon-keyvalue.render.com:6379
+      host: oregon-keyvalue.render.com
+      port: 6379
+      username: red-d40ub0k9c44c73cdgu60
+      password: eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY
       timeout: 30000
       connect-timeout: 10000
+      ssl: true
 
 rapidstay:
   api:
