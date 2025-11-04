@@ -95,10 +95,12 @@ spring:
 
   data:
     redis:
-      url: rediss://default:1234@premium-mongrel-33101.upstash.io:6379
+      host: premium-mongrel-33101.upstash.io
+      port: 6379
+      username: default
+      password: 1234
       ssl: true
       timeout: 10000
-      connect-timeout: 5000
 
 rapidstay:
   api:
@@ -151,10 +153,12 @@ spring:
 
   data:
     redis:
-      url: rediss://default:1234@premium-mongrel-33101.upstash.io:6379
+      host: premium-mongrel-33101.upstash.io
+      port: 6379
+      username: default
+      password: 1234
       ssl: true
       timeout: 10000
-      connect-timeout: 5000
 
 rapidstay:
   api:
