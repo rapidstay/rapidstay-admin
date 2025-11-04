@@ -42,9 +42,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // --- Database (개발용) ---
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+    // --- ✅ Database (PostgreSQL) ---
+    implementation 'org.postgresql:postgresql:42.7.3'
 
     // --- Test ---
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

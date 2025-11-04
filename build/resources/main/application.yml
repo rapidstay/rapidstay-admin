@@ -1,23 +1,33 @@
 server:
-  port: ${SERVER_PORT:8082}   # ✅ 기본 8082 (Render에선 SERVER_PORT=8080 설정)
+  port: ${SERVER_PORT:8082}
   servlet:
     context-path: /
 
 spring:
   application:
     name: rapidstay-admin
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+# ======================================================
+# 🏠 local 환경
+# ======================================================
+---
+spring:
+  config:
+    activate:
+      on-profile: local
 
   datasource:
-    driver-class-name: org.h2.Driver
-    # ✅ 로컬은 /Users 경로, Render에선 DB_URL 환경변수로 override
-    url: ${DB_URL:jdbc:h2:file:/Users/kim-inho/rapidstay-batch-db;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE}
-    username: sa
-    password:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://dpg-d44bbu3ipnbc73d2n6q0-a.oregon-postgres.render.com:5432/rapidstay_db}
+    username: ${DB_USER:redshine75}
+    password: ${DB_PASS:EKj5HOzXrKDY91Y4a5F4rQzDyyL5QWpR}
 
   jpa:
     hibernate:
-      ddl-auto: none    # ❗ 스키마 덮어쓰지 않도록 유지
-    show-sql: false
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
@@ -29,16 +39,9 @@ spring:
       port: ${REDIS_PORT:6379}
       timeout: 2000
 
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
-sql:
-  init:
-    mode: always
-    schema-locations: classpath:/db/schema.sql
-    data-locations: classpath:/db/data.sql
+  sql:
+    init:
+      mode: never
 
 rapidstay:
   api:
@@ -53,3 +56,95 @@ logging:
   level:
     root: INFO
     com.rapidstay: DEBUG
+
+# ======================================================
+# 🚧 dev 환경 (Render / 개발서버)
+# ======================================================
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://dpg-d44bbu3ipnbc73d2n6q0-a.oregon-postgres.render.com:5432/rapidstay_db
+    username: redshine75
+    password: EKj5HOzXrKDY91Y4a5F4rQzDyyL5QWpR
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000
+
+  sql:
+    init:
+      mode: never
+
+rapidstay:
+  api:
+    base-url: ${API_BASE_URL:https://xap-h2xh.onrender.com}
+
+admin:
+  security:
+    username: rapidadmin
+    password: rapid1234
+
+logging:
+  level:
+    root: INFO
+    com.rapidstay: DEBUG
+
+# ======================================================
+# 🚀 prod 환경 (운영)
+# ======================================================
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://dpg-d44bbu3ipnbc73d2n6q0-a.oregon-postgres.render.com:5432/rapidstay_db
+    username: redshine75
+    password: EKj5HOzXrKDY91Y4a5F4rQzDyyL5QWpR
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: false
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      timeout: 2000
+
+rapidstay:
+  api:
+    base-url: ${API_BASE_URL:https://xap-h2xh.onrender.com}
+
+admin:
+  security:
+    username: rapidadmin
+    password: rapid1234
+
+logging:
+  level:
+    root: INFO
+    com.rapidstay: INFO
