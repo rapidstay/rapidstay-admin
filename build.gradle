@@ -19,8 +19,6 @@ repositories {
 }
 
 dependencies {
-    // --- ✅ 공통 모듈 (common.jar 직접 포함) ---
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // --- Spring 기본 ---
     implementation 'org.springframework.boot:spring-boot-starter-web'
