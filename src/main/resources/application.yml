@@ -95,7 +95,7 @@ spring:
 
   data:
     redis:
-      url: rediss://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@oregon-keyvalue.render.com:6379
+      url: rediss://default:ARi0AAImcDJjOTRkMGZiOTk5YjQ0YTA3YTg2M2U0ZGU0N2IwMjZiZnAyNjI4Ng@full-goshawk-6286.upstash.io:6379
       timeout: 30s
       connect-timeout: 10s
 
@@ -150,7 +150,7 @@ spring:
 
   data:
     redis:
-      url: rediss://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@oregon-keyvalue.render.com:6379
+      url: rediss://default:ARi0AAImcDJjOTRkMGZiOTk5YjQ0YTA3YTg2M2U0ZGU0N2IwMjZiZnAyNjI4Ng@full-goshawk-6286.upstash.io:6379
       timeout: 30s
       connect-timeout: 10s
 
