@@ -98,7 +98,8 @@ spring:
       host: red-d40ub0k9c44c73cdgu60
       port: 6379
       password: eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY
-      ssl: false
+      ssl:
+        enabled: false   # ✅ 이게 진짜 적용됨
       timeout: 30s
       connect-timeout: 10s
 
@@ -156,7 +157,8 @@ spring:
       host: red-d40ub0k9c44c73cdgu60
       port: 6379
       password: eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY
-      ssl: false        # 반드시 false
+      ssl:
+        enabled: false   # ✅ 이게 진짜 적용됨
       timeout: 30s
       connect-timeout: 10s
 
