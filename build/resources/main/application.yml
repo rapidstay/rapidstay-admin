@@ -1,16 +1,11 @@
-server:
-  port: 8082
-  servlet:
-    context-path: /
-
 spring:
   application:
-    name: rapidstay-admin
+    name: staypick-admin
   profiles:
-    active: local
+    active: ${SPRING_PROFILES_ACTIVE:local}
 
 # ======================================================
-# 🏠 Local (외부 SSL 접속)
+# 🧩 Local → RDS(Postgres) + Upstash Redis
 # ======================================================
 ---
 spring:
@@ -20,111 +15,38 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://dpg-d44bbu3ipnbc73d2n6q0-a.oregon-postgres.render.com:5432/rapidstay_db
-    username: redshine75
-    password: EKj5HOzXrKDY91Y4a5F4rQzDyyL5QWpR
+    url: jdbc:postgresql://staypick-db.cbmco4g6gjal.ap-southeast-2.rds.amazonaws.com:5432/staypick
+    username: staypick
+    password: he10042525
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-    defer-datasource-initialization: true
+        connection.isolation: 2
     open-in-view: false
 
   data:
     redis:
-      url: rediss://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@oregon-keyvalue.render.com:6379
-      timeout: 30s
+      url: rediss://default:ARiOAAImcDJjOTRkMGZiOTk5YjQ0YTA3YTg2M2U0ZGU0N2IwMjZiZnAyNjI4Ng@full-goshawk-6286.upstash.io:6379
+      timeout: 20s
       connect-timeout: 10s
 
-  sql:
-    init:
-      mode: never
-
-rapidstay:
-  api:
-    base-url: http://localhost:8081
-
-admin:
-  security:
-    username: rapidadmin
-    password: rapid1234
+server:
+  port: 8082
 
 logging:
   level:
     root: INFO
-    com.rapidstay: DEBUG
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: never
+    com.staypick: DEBUG
 
 
 # ======================================================
-# 🚧 Dev (Render 내부용 / 개발서버)
-# ======================================================
----
-spring:
-  config:
-    activate:
-      on-profile: dev
-
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://dpg-d44bbu3ipnbc73d2n6q0-a.oregon-postgres.render.com:5432/rapidstay_db
-    username: redshine75
-    password: EKj5HOzXrKDY91Y4a5F4rQzDyyL5QWpR
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: false
-    properties:
-      hibernate:
-        format_sql: true
-    defer-datasource-initialization: true
-    open-in-view: false
-
-  data:
-    redis:
-      url: redis://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@red-d40ub0k9c44c73cdgu60:6379
-      timeout: 30s
-      connect-timeout: 10s
-
-rapidstay:
-  api:
-    base-url: https://rapidstay-api.onrender.com
-
-admin:
-  security:
-    username: rapidadmin
-    password: rapid1234
-
-logging:
-  level:
-    root: INFO
-    com.rapidstay: DEBUG
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: never
-
-
-# ======================================================
-# 🚀 Prod (Render 내부용 / 운영)
+# 🚀 Prod → RDS(Postgres) + EC2 Redis 컨테이너
 # ======================================================
 ---
 spring:
@@ -134,9 +56,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://dpg-d44bbu3ipnbc73d2n6q0-a.oregon-postgres.render.com:5432/rapidstay_db
-    username: redshine75
-    password: EKj5HOzXrKDY91Y4a5F4rQzDyyL5QWpR
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASS}
 
   jpa:
     hibernate:
@@ -144,35 +66,22 @@ spring:
     show-sql: false
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-    defer-datasource-initialization: false
     open-in-view: false
 
   data:
     redis:
-      url: redis://red-d40ub0k9c44c73cdgu60:eCCiLBqjN0WLXOQrEzDZahZ3dhTm1PkY@red-d40ub0k9c44c73cdgu60:6379
-      timeout: 30s
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+      timeout: 20s
       connect-timeout: 10s
 
-rapidstay:
-  api:
-    base-url: https://rapidstay-api.onrender.com
-
-admin:
-  security:
-    username: rapidadmin
-    password: rapid1234
+server:
+  port: 8082
 
 logging:
   level:
     root: INFO
-    com.rapidstay: INFO
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: never
+    com.staypick: INFO

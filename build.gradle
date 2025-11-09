@@ -19,32 +19,30 @@ repositories {
 }
 
 dependencies {
-
-    // --- Spring 기본 ---
+    // ✅ Spring 기본 구성
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-    // --- Spring Batch (Job 트리거 용도일 경우 유지) ---
+    // ✅ 추가: Spring Batch (AdminOpsController에서 JobLauncher 사용 중)
     implementation 'org.springframework.boot:spring-boot-starter-batch'
 
-    // --- JWT ---
+    // ✅ JWT & Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-    // --- Lombok ---
+    // ✅ 데이터베이스
+    runtimeOnly 'com.h2database:h2'                     // Local
+    runtimeOnly 'org.postgresql:postgresql:42.7.3'      // Prod
+
+    // ✅ Lombok & Test
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
-    // --- ✅ Database (PostgreSQL) ---
-    implementation 'org.postgresql:postgresql:42.7.3'
-
-    // --- Test ---
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
